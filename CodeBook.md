@@ -23,8 +23,10 @@ Data transformation steps
 Variables in the second_TidySet.txt
 
 
-subjectId
+The identifiers are subjectId,activityId
 
-activityId
+The data labels are as x_test,y_train,y_train,y_test,merging_train,merging_test merged_data,all_merged_data,second_Tidyset
+
+
 
 
