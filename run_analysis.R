@@ -3,8 +3,8 @@ setwd('C:/Users/Tinashe/rstuff/webscaping')
 
 #install.packages("dplyr")
 #install.packages("reshape2")
-#library(dplyr)
-#library(reshape2)
+library(dplyr)
+library(reshape2)
 
 # run_analysis.r File Description:
 
@@ -88,6 +88,23 @@ all_merged_data <- rbind(merging_train, merging_test)
 colNames <- colnames(all_merged_data)
 
 
+# 2. Extract only the measurements on the mean and standard deviation for each measurement.
+mean_and_standard_deviation <- (grepl("activityId" , colNames) | 
+                                grepl("subjectId" , colNames) | 
+                                grepl("mean.." , colNames) | 
+                                grepl("std.." , colNames) 
+                                )
+# getting a subset of mean and standard_deviation
+get_mean_and_standard_deviation <- all_merged_data[ , mean_and_standard_deviation == TRUE]
 
-library(knitr)
-knit2html("codebook.Rmd")
+# 4. Appropriately label the data set with descriptive activity names. 
+labelWithActivityNames <- merge(get_mean_and_standard_deviation, activityLabels,by='activityId',
+                                                                  all.x=TRUE)
+#5. Creates a second, independent tidy data set with the average of each variable for 
+#    each activity and each subject.
+
+second_TidySet <- aggregate(. ~subjectId + activityId, labelWithActivityNames, mean)%>% 
+                   group_by(subjectId,activityId)
+
+#write data to a text file
+write.table(second_TidySet, "second_TidySet.txt", row.name=FALSE)
