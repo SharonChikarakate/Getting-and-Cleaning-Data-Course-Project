@@ -20,13 +20,11 @@ Data transformation steps
 7.Creating a second, independent tidy data set with the average of each variable for each activity and each subject
 8. Writing the second dataset to a text file
 
-Variables in the second_TidySet.txt
-
-
-The identifiers are subjectId,activityId
 
 The data labels are as x_test,y_train,y_train,y_test,merging_train,merging_test merged_data,all_merged_data,second_Tidyset
 
+Variables in the second_TidySet.txt
 
+The identifiers are subjectId,activityId
 
 
